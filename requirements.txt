@@ -1,0 +1,7 @@
+yfinance
+pandas
+numpy
+matplotlib
+https://github.com/bukosabino/ta/archive/refs/heads/master.zip
+https://github.com/keithorange/PatternPy/archive/refs/heads/master.zip
+https://github.com/KVignesh122/AssetNewsSentimentAnalyzer/archive/refs/heads/master.zip
