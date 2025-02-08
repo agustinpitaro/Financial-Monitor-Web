@@ -5,3 +5,5 @@ matplotlib
 ta
 https://github.com/keithorange/PatternPy/archive/refs/heads/master.zip
 asset-sentiment-analyzer
+scikit-learn
+seaborn
