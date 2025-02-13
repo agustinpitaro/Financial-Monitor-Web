@@ -3,7 +3,8 @@ import pandas as pd
 
 class FeatureSelector:
     """
-    Elimina features con alta correlación para reducir sobreajuste y ruido.
+    Clase encargada de la selección de features, 
+    incluyendo la eliminación de columnas altamente correlacionadas.
     """
     def __init__(self, data: pd.DataFrame, features: list):
         self.data = data
@@ -11,9 +12,8 @@ class FeatureSelector:
 
     def remove_highly_correlated(self, threshold=0.9):
         """
+        Elimina features con correlación mayor a 'threshold'.
         Retorna (selected_features, dropped_features).
-        - selected_features: las que se mantienen
-        - dropped_features: las que se eliminan por correlación alta
         """
         corr_matrix = self.data[self.features].corr().abs()
         upper = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))

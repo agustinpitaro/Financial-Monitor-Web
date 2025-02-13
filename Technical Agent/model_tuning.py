@@ -3,20 +3,19 @@ from sklearn.model_selection import GridSearchCV, TimeSeriesSplit
 
 class ModelTuner:
     """
-    Clase que encapsula la búsqueda de hiperparámetros con GridSearchCV
-    usando TimeSeriesSplit para datos secuenciales.
+    Clase para encapsular la lógica de ajuste de hiperparámetros (grid search).
     """
-    def __init__(self, param_grid, cv_splits=5):
+    def __init__(self, param_grid: dict, cv_splits=5):
         self.param_grid = param_grid
         self.cv_splits = cv_splits
         self.best_model = None
         self.best_params = None
-        self.best_score = None
+        self.best_score  = None
 
     def tune(self, X_train, y_train):
         """
-        Aplica GridSearchCV (RandomForest) con validación temporal.
-        Retorna: (best_model, best_params, best_score)
+        Ejecuta GridSearchCV con validación temporal (TimeSeriesSplit)
+        y asigna el mejor modelo a self.best_model
         """
         tscv = TimeSeriesSplit(n_splits=self.cv_splits)
         grid_search = GridSearchCV(

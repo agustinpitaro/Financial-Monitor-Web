@@ -2,32 +2,19 @@ import yfinance as yf
 import pandas as pd
 
 class DataLoader:
-    def __init__(self, tickers, start_date, end_date):
-        self.tickers = tickers
+    """
+    Clase encargada de descargar y preparar datos del mercado 
+    a partir de yfinance (u otra fuente).
+    """
+    def __init__(self, ticker: str, start_date: str, end_date: str):
+        self.ticker = ticker
         self.start_date = start_date
         self.end_date = end_date
 
-    def load_data_multi(self) -> pd.DataFrame:
+    def load_data(self) -> pd.DataFrame:
         """
-        Descarga datos de cada ticker en su propio DataFrame,
-        añade la columna 'Ticker', y concatena en formato largo.
+        Descarga datos históricos de yfinance y los retorna como un DataFrame.
         """
-        all_data = []
-        for t in self.tickers:
-            print(f"Descargando {t} de {self.start_date} a {self.end_date}")
-            # DESCARGA SOLO UN TICKER A LA VEZ
-            df_t = yf.download(t, start=self.start_date, end=self.end_date, progress=False)
-            # Añadimos la columna Ticker
-            print(df_t.columns)
-            df_t["Ticker"] = t
-            print(df_t.columns)
-            df_t.reset_index(inplace=True)
-            all_data.append(df_t)
-            print(all_data.columns)
-
-        # Concatenamos en 'formato largo': un solo DataFrame
-        df_all = pd.concat(all_data)
-        print(df_all.columns)
-        # Reseteamos índice para que 'Date' sea columna normal
-        df_all.reset_index(inplace=True)  # Devuelve 'Date' como columna
-        return df_all
+        print(f"Descargando datos de {self.ticker} desde {self.start_date} hasta {self.end_date} ...")
+        data = yf.download(self.ticker, start=self.start_date, end=self.end_date)
+        return data
